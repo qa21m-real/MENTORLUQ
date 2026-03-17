@@ -12,7 +12,7 @@ export function createNavMenu({
   panel = documentRef.querySelector("[data-mobile-nav]")
 } = {}) {
   const ElementConstructor = getElementConstructor(documentRef);
-  const panelItems = panel ? Array.from(panel.querySelectorAll("a, button")) : [];
+  const panelCloseItems = panel ? Array.from(panel.querySelectorAll("[data-mobile-nav-close]")) : [];
   let openState = false;
 
   function syncState() {
@@ -63,7 +63,7 @@ export function createNavMenu({
       });
     }
 
-    panelItems.forEach((item) => {
+    panelCloseItems.forEach((item) => {
       item.addEventListener("click", function () {
         setOpenState(false);
       });

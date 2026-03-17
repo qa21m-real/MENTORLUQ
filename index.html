@@ -22,7 +22,7 @@
           class="mobile-nav-toggle"
           type="button"
           aria-expanded="false"
-          aria-controls="primaryNav"
+          aria-controls="primaryNavPanel"
           aria-label="Naviqasiya menyusu"
           data-mobile-nav-toggle
           data-i18n-attr="aria-label:mobile_nav_toggle_label"
@@ -35,53 +35,55 @@
           <span class="mobile-nav-toggle__text" data-i18n="mobile_nav_button">Menyu</span>
         </button>
 
-        <nav id="primaryNav" class="nav-buttons" data-mobile-nav aria-label="Primary">
-          <a href="#about" class="nav-btn" data-i18n="nav_about">Haqqımda</a>
-          <a href="#services" class="nav-btn" data-i18n="nav_services">Xidmətlər</a>
-          <a href="#results" class="nav-btn" data-i18n="nav_results">Nəticələr</a>
-          <a href="#contact" class="btn btn-small" data-i18n="nav_contact">Əlaqə</a>
-        </nav>
+        <div id="primaryNavPanel" class="nav-panel" data-mobile-nav>
+          <nav id="primaryNav" class="nav-buttons" aria-label="Primary">
+            <a href="#about" class="nav-btn" data-mobile-nav-close data-i18n="nav_about">Haqqımda</a>
+            <a href="#services" class="nav-btn" data-mobile-nav-close data-i18n="nav_services">Xidmətlər</a>
+            <a href="#results" class="nav-btn" data-mobile-nav-close data-i18n="nav_results">Nəticələr</a>
+            <a href="#contact" class="btn btn-small" data-mobile-nav-close data-i18n="nav_contact">Əlaqə</a>
+          </nav>
 
-        <div class="header-actions">
-          <div class="lang-dropdown">
-            <button
-              id="languageMenuBtn"
-              class="lang-btn"
-              type="button"
-              aria-label="Dil seç"
-              aria-expanded="false"
-              aria-controls="languageMenu"
-              data-i18n-attr="aria-label:language_menu_label"
-            >
-              AZ
-            </button>
+          <div class="header-actions">
+            <div class="lang-dropdown">
+              <button
+                id="languageMenuBtn"
+                class="lang-btn"
+                type="button"
+                aria-label="Dil seç"
+                aria-expanded="false"
+                aria-controls="languageMenu"
+                data-i18n-attr="aria-label:language_menu_label"
+              >
+                AZ
+              </button>
 
-            <div id="languageMenu" class="lang-menu" role="menu" hidden>
-              <button type="button" class="lang-menu-item" data-lang="az" role="menuitemradio">
-                Azərbaycan
-              </button>
-              <button type="button" class="lang-menu-item" data-lang="en" role="menuitemradio">
-                English
-              </button>
-              <button type="button" class="lang-menu-item" data-lang="ru" role="menuitemradio">
-                Русский
-              </button>
-              <button type="button" class="lang-menu-item" data-lang="tr" role="menuitemradio">
-                Türkçe
+              <div id="languageMenu" class="lang-menu" role="menu" hidden>
+                <button type="button" class="lang-menu-item" data-lang="az" role="menuitemradio">
+                  Azərbaycan
+                </button>
+                <button type="button" class="lang-menu-item" data-lang="en" role="menuitemradio">
+                  English
+                </button>
+                <button type="button" class="lang-menu-item" data-lang="ru" role="menuitemradio">
+                  Русский
+                </button>
+                <button type="button" class="lang-menu-item" data-lang="tr" role="menuitemradio">
+                  Türkçe
+                </button>
+              </div>
+            </div>
+
+            <div class="theme-switcher">
+              <button
+                id="themeToggleBtn"
+                class="theme-btn"
+                type="button"
+                aria-label="Tema dəyişdir"
+                data-i18n-attr="aria-label:theme_toggle_label"
+              >
+                ☀
               </button>
             </div>
-          </div>
-
-          <div class="theme-switcher">
-            <button
-              id="themeToggleBtn"
-              class="theme-btn"
-              type="button"
-              aria-label="Tema dəyişdir"
-              data-i18n-attr="aria-label:theme_toggle_label"
-            >
-              ☀
-            </button>
           </div>
         </div>
       </div>

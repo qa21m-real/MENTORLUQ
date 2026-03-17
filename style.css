@@ -11,6 +11,10 @@
   --hero-grad-1: #11392d;
   --hero-grad-2: #071510;
   --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.18);
+  --motion-fast: 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-medium: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-slow: 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  --press-scale: 0.992;
 }
 
 body.light-mode {
@@ -36,6 +40,8 @@ body.light-mode {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -58,13 +64,28 @@ input,
 textarea,
 select {
   font: inherit;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 a,
 button,
 input,
 textarea {
-  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  transition:
+    border-color var(--motion-fast),
+    color var(--motion-fast),
+    background var(--motion-fast),
+    transform var(--motion-fast),
+    opacity var(--motion-fast),
+    box-shadow var(--motion-fast);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+a,
+button {
+  user-select: none;
 }
 
 a:focus-visible,
@@ -91,6 +112,7 @@ textarea:focus-visible {
   background: rgba(7, 21, 16, 0.88);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(10px);
+  transition: background var(--motion-fast), border-color var(--motion-fast);
 }
 
 body.light-mode .navbar {
@@ -125,6 +147,24 @@ body.light-mode .navbar {
   min-width: 0;
 }
 
+.nav-panel {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  min-width: 0;
+  transition:
+    opacity var(--motion-fast),
+    transform var(--motion-medium),
+    max-height var(--motion-medium),
+    box-shadow var(--motion-fast),
+    border-color var(--motion-fast),
+    background var(--motion-fast);
+  transform-origin: top center;
+}
+
 .mobile-nav-toggle {
   display: none;
   align-items: center;
@@ -137,6 +177,7 @@ body.light-mode .navbar {
   color: var(--text);
   cursor: pointer;
   font-weight: 700;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0);
 }
 
 .mobile-nav-toggle__icon {
@@ -184,6 +225,7 @@ body.light-mode .navbar {
   border-radius: 999px;
   background: var(--bg-card);
   border: 1px solid var(--border);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0);
 }
 
 .nav-btn:hover {
@@ -216,6 +258,7 @@ body.light-mode .navbar {
   color: var(--text);
   cursor: pointer;
   font-weight: 700;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0);
 }
 
 .lang-btn:hover {
@@ -227,6 +270,9 @@ body.light-mode .navbar {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   min-width: 180px;
   max-width: min(240px, calc(100vw - 32px));
   padding: 8px;
@@ -235,6 +281,15 @@ body.light-mode .navbar {
   background: var(--bg);
   box-shadow: var(--shadow-soft);
   z-index: 1200;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--motion-fast),
+    transform var(--motion-fast),
+    visibility var(--motion-fast);
+  transform-origin: top right;
 }
 
 body.light-mode .lang-menu {
@@ -242,9 +297,10 @@ body.light-mode .lang-menu {
 }
 
 .lang-menu.show {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .lang-menu-item {
@@ -256,6 +312,7 @@ body.light-mode .lang-menu {
   text-align: left;
   cursor: pointer;
   font-weight: 600;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0);
 }
 
 .lang-menu-item:hover,
@@ -280,6 +337,7 @@ body.light-mode .lang-menu {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0);
 }
 
 body:not(.light-mode) .theme-btn {
@@ -388,7 +446,11 @@ body.light-mode .theme-btn {
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: clamp(20px, 3vw, 24px);
-  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background var(--motion-fast),
+    border-color var(--motion-fast),
+    transform var(--motion-fast),
+    box-shadow var(--motion-fast);
 }
 
 .hero-card h3 {
@@ -474,6 +536,10 @@ body.light-mode .theme-btn {
   border-radius: 14px;
   padding: 8px;
   overflow: hidden;
+  transition:
+    transform var(--motion-fast),
+    box-shadow var(--motion-fast),
+    border-color var(--motion-fast);
 }
 
 .certificate-card:hover {
@@ -521,6 +587,17 @@ body.light-mode .theme-btn {
   background: rgba(255, 255, 255, 0.04);
   color: var(--text);
   outline: none;
+  transition:
+    border-color var(--motion-fast),
+    background var(--motion-fast),
+    box-shadow var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(57, 255, 136, 0.12);
 }
 
 .contact-form textarea {
@@ -555,6 +632,7 @@ body.light-mode .contact-form textarea {
   align-items: center;
   padding: clamp(16px, 4vw, 24px);
   background: rgba(0, 0, 0, 0.9);
+  animation: overlay-fade-in var(--motion-fast);
 }
 
 .lightbox-content {
@@ -562,6 +640,7 @@ body.light-mode .contact-form textarea {
   max-height: 90vh;
   border-radius: 18px;
   box-shadow: 0 0 34px rgba(0, 0, 0, 0.35);
+  animation: modal-pop-in var(--motion-medium);
 }
 
 .lightbox-close {
@@ -576,6 +655,32 @@ body.light-mode .contact-form textarea {
   color: white;
   font-size: 30px;
   cursor: pointer;
+  transition:
+    transform var(--motion-fast),
+    background var(--motion-fast),
+    opacity var(--motion-fast);
+}
+
+@keyframes overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @media (max-width: 1024px) {
@@ -604,42 +709,143 @@ body.light-mode .contact-form textarea {
     width: min(92%, 1150px);
   }
 
-  .top-controls {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+  .nav-content {
+    flex-direction: row;
     align-items: center;
-    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .top-controls {
+    position: relative;
+    display: block;
+    width: auto;
+    flex: 0 0 auto;
   }
 
   .mobile-nav-toggle {
     display: inline-flex;
+    width: auto;
+    min-width: 108px;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 16px;
+    justify-content: space-between;
+  }
+
+  .nav-panel {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: min(320px, calc(100vw - 24px));
+    max-height: 0;
+    margin-top: 0;
+    padding: 0 10px;
+    gap: 12px;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background:
+      linear-gradient(180deg, rgba(3, 10, 8, 0.98) 0%, rgba(7, 21, 16, 0.97) 52%, rgba(11, 31, 24, 0.95) 100%);
+    opacity: 0;
+    transform: translateY(-6px) scale(0.995);
+    visibility: hidden;
+    pointer-events: none;
+    overflow: hidden;
+    border-color: transparent;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0);
+    z-index: 1300;
+  }
+
+  .nav-panel.is-open {
+    max-height: min(80vh, 560px);
+    padding: 10px;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+    border-color: var(--border);
+    box-shadow: var(--shadow-soft);
+    overflow: visible;
+  }
+
+  body.light-mode .nav-panel {
+    background:
+      linear-gradient(180deg, rgba(15, 40, 28, 0.98) 0%, rgba(26, 61, 43, 0.96) 54%, rgba(37, 86, 60, 0.94) 100%);
   }
 
   .nav-buttons {
-    display: none;
-    grid-column: 1 / -1;
     width: 100%;
-    margin-top: 4px;
-    padding: 8px;
-    gap: 10px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    background: var(--bg-card);
-  }
-
-  .nav-buttons.is-open {
     display: grid;
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .nav-btn,
-  .btn-small {
+  .btn-small,
+  .lang-btn,
+  .theme-btn {
     width: 100%;
-    padding: 11px 14px;
+    min-height: 50px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: none;
   }
 
   .header-actions {
-    justify-content: flex-end;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .lang-dropdown,
+  .theme-switcher {
+    width: 100%;
+  }
+
+  .lang-menu {
+    position: static;
+    margin-top: 8px;
+    transform-origin: top center;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 0;
+    max-height: 0;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    overflow: hidden;
+    transform: translateY(-4px);
+    transition:
+      max-height var(--motion-medium),
+      opacity var(--motion-fast),
+      transform var(--motion-fast),
+      padding var(--motion-fast),
+      border-color var(--motion-fast);
+    min-width: 0;
+    max-width: none;
+  }
+
+  .lang-menu.show {
+    padding: 8px;
+    max-height: 280px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .lang-menu-item {
+    min-height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 100%;
   }
 
   .hero-buttons {
@@ -652,31 +858,17 @@ body.light-mode .contact-form textarea {
 }
 
 @media (max-width: 520px) {
-  .top-controls {
-    grid-template-columns: 1fr;
-    align-items: stretch;
+  .container {
+    width: min(94%, 1150px);
   }
 
   .mobile-nav-toggle {
-    width: 100%;
-    justify-content: space-between;
+    min-width: 96px;
+    padding: 0 14px;
   }
 
-  .header-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
-
-  .lang-btn,
-  .theme-btn {
-    height: 48px;
-  }
-
-  .lang-menu {
-    left: 0;
-    right: 0;
-    min-width: 0;
-    max-width: none;
+  .nav-panel {
+    width: min(300px, calc(100vw - 20px));
   }
 
   .hero-card,
@@ -689,5 +881,32 @@ body.light-mode .contact-form textarea {
   .lightbox-close {
     top: 12px;
     right: 12px;
+  }
+}
+
+@media (hover: none) {
+  .mobile-nav-toggle:active,
+  .nav-btn:active,
+  .btn:active,
+  .lang-btn:active,
+  .theme-btn:active,
+  .lang-menu-item:active,
+  .lightbox-close:active {
+    transform: translateY(1px) scale(var(--press-scale));
+    opacity: 0.96;
+  }
+
+  .certificate-card:active {
+    transform: scale(0.992);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
   }
 }

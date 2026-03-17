@@ -107,10 +107,13 @@ describe("ui modules", () => {
       <html>
         <body>
           <button type="button" data-mobile-nav-toggle aria-expanded="false">Menu</button>
-          <nav data-mobile-nav>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </nav>
+          <div data-mobile-nav>
+            <nav>
+              <a href="#about" data-mobile-nav-close>About</a>
+              <a href="#contact" data-mobile-nav-close>Contact</a>
+            </nav>
+            <button type="button" id="themeInside">Theme</button>
+          </div>
         </body>
       </html>`);
     const documentRef = dom.window.document;
@@ -121,11 +124,17 @@ describe("ui modules", () => {
     const toggleButton = documentRef.querySelector("[data-mobile-nav-toggle]");
     const navPanel = documentRef.querySelector("[data-mobile-nav]");
     const navLink = documentRef.querySelector('[href="#about"]');
+    const themeButton = documentRef.getElementById("themeInside");
 
     expect(navPanel.classList.contains("is-open")).toBe(false);
     expect(toggleButton.getAttribute("aria-expanded")).toBe("false");
 
     toggleButton.click();
+
+    expect(navPanel.classList.contains("is-open")).toBe(true);
+    expect(toggleButton.getAttribute("aria-expanded")).toBe("true");
+
+    themeButton.click();
 
     expect(navPanel.classList.contains("is-open")).toBe(true);
     expect(toggleButton.getAttribute("aria-expanded")).toBe("true");

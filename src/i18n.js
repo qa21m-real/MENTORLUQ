@@ -7,6 +7,8 @@ import {
 } from "./translations.js";
 import { createStorageAdapter } from "./storage.js";
 
+const MENU_TRANSITION_MS = 180;
+
 function parseAttributeMappings(attributeValue = "") {
   return attributeValue
     .split(";")
@@ -68,6 +70,29 @@ function syncLanguageItems(languageItems, language) {
   });
 }
 
+function getWindowRef(documentRef) {
+  if (documentRef.defaultView) {
+    return documentRef.defaultView;
+  }
+
+  if (typeof window !== "undefined") {
+    return window;
+  }
+
+  return null;
+}
+
+function scheduleNextFrame(documentRef, callback) {
+  const windowRef = getWindowRef(documentRef);
+
+  if (windowRef && typeof windowRef.requestAnimationFrame === "function") {
+    windowRef.requestAnimationFrame(callback);
+    return;
+  }
+
+  setTimeout(callback, 0);
+}
+
 export function applyTranslations({
   documentRef = document,
   storage,
@@ -101,15 +126,46 @@ export function createI18nController({
   const storageAdapter = createStorageAdapter(storage);
   const languageButtons = Array.from(languageItems);
   let currentLanguage = DEFAULT_LANGUAGE;
+  let closeTimeoutId = null;
+  let menuOpen = false;
+
+  function clearCloseTimer() {
+    if (closeTimeoutId === null) {
+      return;
+    }
+
+    clearTimeout(closeTimeoutId);
+    closeTimeoutId = null;
+  }
 
   function setMenuOpen(isOpen) {
     if (!languageMenu || !languageMenuButton) {
       return;
     }
 
-    languageMenu.hidden = !isOpen;
-    languageMenu.classList.toggle("show", isOpen);
+    menuOpen = Boolean(isOpen);
     languageMenuButton.setAttribute("aria-expanded", String(isOpen));
+
+    clearCloseTimer();
+
+    if (isOpen) {
+      languageMenu.hidden = false;
+      languageMenu.setAttribute("aria-hidden", "false");
+
+      scheduleNextFrame(documentRef, () => {
+        languageMenu.classList.add("show");
+      });
+
+      return;
+    }
+
+    languageMenu.classList.remove("show");
+    languageMenu.setAttribute("aria-hidden", "true");
+
+    closeTimeoutId = setTimeout(() => {
+      languageMenu.hidden = true;
+      closeTimeoutId = null;
+    }, MENU_TRANSITION_MS);
   }
 
   function setLanguage(language) {
@@ -146,7 +202,7 @@ export function createI18nController({
     if (languageMenuButton && languageMenu) {
       languageMenuButton.addEventListener("click", (event) => {
         event.stopPropagation();
-        setMenuOpen(languageMenu.hidden);
+        setMenuOpen(!menuOpen);
       });
     }
 

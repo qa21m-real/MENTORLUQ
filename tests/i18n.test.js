@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { applyTranslations, createI18nController } from "../src/i18n.js";
 import { createDom, createStorageMock } from "./helpers.js";
@@ -62,6 +62,8 @@ describe("i18n", () => {
   });
 
   it("opens the language menu, switches language, and closes again", () => {
+    vi.useFakeTimers();
+
     const dom = createI18nDocument();
     const documentRef = dom.window.document;
     const storage = createStorageMock({ language: "en" });
@@ -90,9 +92,12 @@ describe("i18n", () => {
     expect(button.getAttribute("aria-expanded")).toBe("true");
 
     azerbaijaniButton.click();
+    vi.runAllTimers();
     expect(menu.hidden).toBe(true);
     expect(button.textContent).toBe("AZ");
     expect(storage.getItem("language")).toBe("az");
     expect(azerbaijaniButton.getAttribute("aria-checked")).toBe("true");
+
+    vi.useRealTimers();
   });
 });
