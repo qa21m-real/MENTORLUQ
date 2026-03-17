@@ -862,6 +862,10 @@ body.light-mode .contact-form textarea {
     width: min(94%, 1150px);
   }
 
+  .logo {
+    font-size: 22px;
+  }
+
   .mobile-nav-toggle {
     min-width: 96px;
     padding: 0 14px;
