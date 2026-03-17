@@ -1,6 +1,7 @@
 import { initApp } from "./src/app.js";
 
 function bootstrap() {
+  document.documentElement.classList.add("js-ready");
   initApp();
 }
 
