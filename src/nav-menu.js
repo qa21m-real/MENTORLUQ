@@ -23,6 +23,10 @@ export function createNavMenu({
     panel.classList.toggle("is-open", openState);
     toggleButton.classList.toggle("is-active", openState);
     toggleButton.setAttribute("aria-expanded", String(openState));
+
+    if (documentRef.body) {
+      documentRef.body.classList.toggle("mobile-nav-open", openState);
+    }
   }
 
   function setOpenState(nextState) {

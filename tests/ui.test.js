@@ -128,11 +128,13 @@ describe("ui modules", () => {
 
     expect(navPanel.classList.contains("is-open")).toBe(false);
     expect(toggleButton.getAttribute("aria-expanded")).toBe("false");
+    expect(documentRef.body.classList.contains("mobile-nav-open")).toBe(false);
 
     toggleButton.click();
 
     expect(navPanel.classList.contains("is-open")).toBe(true);
     expect(toggleButton.getAttribute("aria-expanded")).toBe("true");
+    expect(documentRef.body.classList.contains("mobile-nav-open")).toBe(true);
 
     themeButton.click();
 
@@ -143,5 +145,6 @@ describe("ui modules", () => {
 
     expect(navPanel.classList.contains("is-open")).toBe(false);
     expect(toggleButton.getAttribute("aria-expanded")).toBe("false");
+    expect(documentRef.body.classList.contains("mobile-nav-open")).toBe(false);
   });
 });
