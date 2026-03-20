@@ -1,4 +1,5 @@
 import { createContactForm } from "./contact-form.js";
+import { createHeroChart } from "./hero-chart.js";
 import { createI18nController } from "./i18n.js";
 import { createLightbox } from "./lightbox.js";
 import { createNavMenu } from "./nav-menu.js";
@@ -24,6 +25,7 @@ export function initApp({ documentRef = document, storage } = {}) {
   const navMenuController = createNavMenu({ documentRef });
   const sectionExperienceController = createSectionExperience({ documentRef });
   const contactFormController = createContactForm({ documentRef, storage });
+  const heroChartController = createHeroChart({ documentRef });
 
   themeController.init();
   i18nController.init();
@@ -31,6 +33,7 @@ export function initApp({ documentRef = document, storage } = {}) {
   navMenuController.init();
   sectionExperienceController.init();
   contactFormController.init();
+  heroChartController.init();
 
   return {
     themeController,
@@ -38,6 +41,7 @@ export function initApp({ documentRef = document, storage } = {}) {
     lightboxController,
     navMenuController,
     sectionExperienceController,
-    contactFormController
+    contactFormController,
+    heroChartController
   };
 }
