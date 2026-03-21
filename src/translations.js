@@ -136,13 +136,19 @@ export const translations = {
       "Bu mentorluq qazanc vədi vermir. Tradingdə nəticə zaman, təcrübə, intizam və düzgün tətbiq ilə formalaşır. Burada sənə təqdim olunan əsas dəyər aydın təməl, peşəkar baxış, sistemli yanaşma və inkişaf üçün düzgün istiqamətdir.",
     name_label: "Ad",
     email_label: "Email",
+    phone_label: "Nömrə",
     message_label: "Mesaj",
     name_placeholder: "Adın",
     email_placeholder: "Email ünvanın",
+    phone_placeholder: "+994 50 123 45 67",
     message_placeholder: "Tradingdə hazırkı vəziyyətin nədir?",
     send_btn: "Müraciət et",
     footer_text: "© 2026 ApexExecution. Bütün hüquqlar qorunur.",
-    form_success: "Müraciətin qeydə alındı. Tezliklə səninlə əlaqə saxlanılacaq."
+    form_success: "Müraciətin qeydə alındı. Tezliklə səninlə əlaqə saxlanılacaq.",
+    form_sending: "Müraciətin göndərilir...",
+    form_error: "Göndəriş zamanı problem yarandı. Bir daha cəhd et.",
+    form_config_error:
+      "Email sistemi hələ tamam qurulmayıb. EmailJS açarlarını əlavə etdikdən sonra form işləyəcək."
   },
   en: {
     page_title: "ApexExecution | Trading Mentorship",
@@ -271,13 +277,19 @@ export const translations = {
       "This mentorship does not promise profits. The core value here is a clear foundation, professional perspective, systematic approach, and the right direction for growth.",
     name_label: "Name",
     email_label: "Email",
+    phone_label: "Phone",
     message_label: "Message",
     name_placeholder: "Your name",
     email_placeholder: "Your email address",
+    phone_placeholder: "+994 50 123 45 67",
     message_placeholder: "What is your current situation in trading?",
     send_btn: "Apply now",
     footer_text: "© 2026 ApexExecution. All rights reserved.",
-    form_success: "Your request has been received. You will be contacted soon."
+    form_success: "Your request has been received. You will be contacted soon.",
+    form_sending: "Sending your request...",
+    form_error: "Something went wrong while sending. Please try again.",
+    form_config_error:
+      "The email system is not fully configured yet. Add the EmailJS keys to enable the form."
   },
   ru: {
     page_title: "ApexExecution | Наставничество по трейдингу",
@@ -408,13 +420,19 @@ export const translations = {
       "Это наставничество не обещает прибыль. Главная ценность здесь — ясная база, профессиональный взгляд, системный подход и правильное направление для развития.",
     name_label: "Имя",
     email_label: "Email",
+    phone_label: "Телефон",
     message_label: "Сообщение",
     name_placeholder: "Твоё имя",
     email_placeholder: "Твой email",
+    phone_placeholder: "+994 50 123 45 67",
     message_placeholder: "Какова твоя текущая ситуация в трейдинге?",
     send_btn: "Подать заявку",
     footer_text: "© 2026 ApexExecution. Все права защищены.",
-    form_success: "Твоя заявка получена. С тобой свяжутся в ближайшее время."
+    form_success: "Твоя заявка получена. С тобой свяжутся в ближайшее время.",
+    form_sending: "Твоя заявка отправляется...",
+    form_error: "Во время отправки возникла проблема. Попробуй ещё раз.",
+    form_config_error:
+      "Email-система ещё не настроена до конца. Добавь ключи EmailJS, и форма начнёт работать."
   },
   tr: {
     page_title: "ApexExecution | Trading Mentorluğu",
@@ -544,13 +562,19 @@ export const translations = {
       "Bu mentorluk kazanç garantisi vermez. Buradaki temel değer net bir temel, profesyonel bakış, sistemli yaklaşım ve gelişim için doğru yön sağlamaktır.",
     name_label: "Ad",
     email_label: "Email",
+    phone_label: "Telefon",
     message_label: "Mesaj",
     name_placeholder: "Adın",
     email_placeholder: "Email adresin",
+    phone_placeholder: "+994 50 123 45 67",
     message_placeholder: "Tradingde mevcut durumun nedir?",
     send_btn: "Şimdi başvur",
     footer_text: "© 2026 ApexExecution. Tüm hakları saklıdır.",
-    form_success: "Başvurun alındı. Yakında seninle iletişime geçilecektir."
+    form_success: "Başvurun alındı. Yakında seninle iletişime geçilecektir.",
+    form_sending: "Başvurun gönderiliyor...",
+    form_error: "Gönderim sırasında bir sorun oluştu. Lütfen tekrar dene.",
+    form_config_error:
+      "Email sistemi henüz tam yapılandırılmadı. EmailJS anahtarları eklendiğinde form çalışacaktır."
   }
 };
 

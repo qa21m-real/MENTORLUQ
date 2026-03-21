@@ -469,6 +469,21 @@
         </div>
 
         <form id="contactForm" class="contact-form" data-reveal="right">
+          <input
+            type="hidden"
+            name="to_email"
+            value="qasimilyasov.21@gmail.com"
+            data-emailjs-destination
+          />
+          <input type="hidden" name="reply_to" value="" data-emailjs-reply-to />
+          <input type="hidden" name="submitted_at" value="" data-emailjs-submitted-at />
+          <input
+            type="hidden"
+            name="subject"
+            value="Yeni mentorluq muracieti - qasimilyasov.21@gmail.com"
+            data-emailjs-subject
+          />
+
           <label class="form-field" for="nameInput">
             <span class="field-label" data-i18n="name_label">Ad</span>
             <input
@@ -491,6 +506,19 @@
               placeholder="Email ünvanın"
               data-i18n-placeholder="email_placeholder"
               autocomplete="email"
+              required
+            />
+          </label>
+
+          <label class="form-field" for="phoneInput">
+            <span class="field-label" data-i18n="phone_label">Nömrə</span>
+            <input
+              id="phoneInput"
+              name="phone"
+              type="tel"
+              placeholder="+994 50 123 45 67"
+              data-i18n-placeholder="phone_placeholder"
+              autocomplete="tel"
               required
             />
           </label>
@@ -533,6 +561,7 @@
     <img id="lightboxImg" class="lightbox-content" data-lightbox-image src="" alt="" />
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="module" src="script.js"></script>
 </body>
 </html>

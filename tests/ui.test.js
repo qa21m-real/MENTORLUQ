@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { createContactForm } from "../src/contact-form.js";
 import { createLightbox } from "../src/lightbox.js";
@@ -70,14 +70,20 @@ describe("ui modules", () => {
     expect(documentRef.body.style.overflow).toBe("");
   });
 
-  it("shows a localized success message after the contact form is submitted", () => {
+  it("shows a localized success message after the contact form is submitted", async () => {
     const dom = createDom(`<!doctype html>
       <html>
         <body>
           <form id="contactForm">
             <input name="name" />
             <input name="email" />
+            <input name="phone" />
             <textarea name="message"></textarea>
+            <input type="hidden" name="to_email" data-emailjs-destination />
+            <input type="hidden" name="reply_to" data-emailjs-reply-to />
+            <input type="hidden" name="submitted_at" data-emailjs-submitted-at />
+            <input type="hidden" name="subject" data-emailjs-subject />
+            <button type="submit">Send</button>
           </form>
           <p data-form-status></p>
         </body>
@@ -86,20 +92,39 @@ describe("ui modules", () => {
     const storage = createStorageMock({ language: "en" });
     const form = documentRef.getElementById("contactForm");
     const inputs = form.querySelectorAll("input, textarea");
+    const emailClient = {
+      sendForm: vi.fn().mockResolvedValue({ status: 200 })
+    };
+    const emailConfig = {
+      publicKey: "public_demo_key",
+      serviceId: "service_demo",
+      templateId: "template_demo",
+      destinationEmail: "qasimilyasov.21@gmail.com"
+    };
 
     inputs[0].value = "Ali";
     inputs[1].value = "ali@example.com";
-    inputs[2].value = "Need help";
+    inputs[2].value = "+994501234567";
+    inputs[3].value = "Need help";
 
-    const controller = createContactForm({ documentRef, storage });
+    const controller = createContactForm({
+      documentRef,
+      storage,
+      emailClient,
+      emailConfig
+    });
     controller.init();
 
     form.dispatchEvent(new dom.window.Event("submit", { bubbles: true, cancelable: true }));
+    await Promise.resolve();
+    await Promise.resolve();
 
     expect(documentRef.querySelector("[data-form-status]").textContent).toContain("received");
+    expect(emailClient.sendForm).toHaveBeenCalledTimes(1);
     expect(inputs[0].value).toBe("");
     expect(inputs[1].value).toBe("");
     expect(inputs[2].value).toBe("");
+    expect(inputs[3].value).toBe("");
   });
 
   it("toggles the mobile nav menu and closes it after a link selection", () => {
