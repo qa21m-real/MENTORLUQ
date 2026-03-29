@@ -1130,6 +1130,12 @@ html.js-ready .section-focus [data-reveal].is-visible {
   letter-spacing: 0.04em;
 }
 
+@media (max-width: 760px) {
+  .process-step__index {
+    display: none;
+  }
+}
+
 .faq-item h3 {
   font-size: clamp(1rem, 2vw, 1.08rem);
 }
